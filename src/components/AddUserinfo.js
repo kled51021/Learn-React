@@ -1,5 +1,5 @@
-import React from "react";
-class AddUserinfor extends React.Component {
+import React, { useState } from "react";
+/* class AddUserinfor extends React.Component {
     state = {
         name: "HaryPhamDev1",
         address: "Hoi dan It",
@@ -54,5 +54,57 @@ class AddUserinfor extends React.Component {
             </div>
         )
     }
+} */
+const AddUserinfo = (props) => {
+    /* state = {
+        name: "HaryPhamDev1",
+        address: "Hoi dan It",
+        age: 26
+    }; */
+    const [name, setName] = useState("")
+    const [address, setAddress] = useState("Hoi dan IT")
+    const [age, setAge] = useState("")
+    const handleOnChange = (event) => {
+        setName(event.target.value)
+    }
+    const handleOnChangeAge = (event) => {
+        /*  this.setState(
+             {
+                 age: event.target.value
+             }
+         ) */
+        setAge(event.target.value)
+    }
+    const handleOnsubmit = (event) => {
+        event.preventDefault()
+        props.HandleAddNewUser(
+            {
+                id: Math.floor((Math.random() * 100) + 1) + '-random',
+                name: name,
+                age: age
+            }
+        )
+
+    }
+    return (
+        <div>
+            My name is {name} and I'm {age}
+            <form onSubmit={(event) => { handleOnsubmit(event) }}>
+                <label>Your name: </label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(event) => { handleOnChange(event) }}>
+                </input>
+                <label>Your age: </label>
+                <input
+                    type="number"
+                    value={age}
+                    onChange={(event) => { handleOnChangeAge(event) }}>
+                </input>
+                <button>Submit</button>
+            </form>
+        </div>
+    )
 }
-export default AddUserinfor
+export default AddUserinfo;
